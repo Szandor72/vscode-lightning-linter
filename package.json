@@ -2,11 +2,20 @@
     "name": "vscode-lightning-linter",
     "displayName": "vscode-lightning-linter",
     "description": "Linting Lightning Component JS Files on the fly using local heroku toolbelt installation of heroku lightning:lint. ",
-    "version": "0.0.1",
-    "publisher": "Szandor72",
+    "version": "0.2.0",
+    "publisher": "szandor72",
     "engines": {
         "vscode": "^1.12.0",
         "node": "^5.10.0"
+    },
+    "bugs": {
+        "url": "https://github.com/Szandor72/vscode-lightning-linter/issues",
+        "email": "smcbreen@microsoft.com"
+    },
+    "homepage": "https://github.com/Szandor72/vscode-lightning-linter/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Szandor72/vscode-lightning-linter.git"
     },
     "categories": [
         "Linters"
@@ -18,7 +27,7 @@
         "Linter"
     ],
     "activationEvents": [
-        "*" 
+        "*"
     ],
     "main": "./out/src/extension",
     "contributes": {
