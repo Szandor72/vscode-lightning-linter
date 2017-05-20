@@ -1,29 +1,68 @@
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+import * as vscode from 'vscode';
+import {lightningLinter} from './lib/lightningLinter';
+import {Config} from './lib/config';
+import * as Path from 'path';
+
 export function activate(context: vscode.ExtensionContext) {
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "vscode-lightning-linter" is now active!');
+    //setup config
+    let config = new Config();
+    // if(config.useDefaultRuleset){
+    //     config.rulesetPath = context.asAbsolutePath(path.join('rulesets', 'apex_ruleset.xml'));
+    // }
+    //todo remove
+    vscode.window.showInformationMessage("Lightning Linter activated");
+    //setup instance vars
+    const collection = vscode.languages.createDiagnosticCollection('lightningLinter');
+    const outputchannel = vscode.window.createOutputChannel('lightningLinter');
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
+    //setup commands
+    context.subscriptions.push(
+         vscode.commands.registerCommand('lightningLinter.showOutput', () => {
+            outputchannel.show();
+        })
+    );
 
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
+    const linter = new lightningLinter(outputchannel, config.Path);
+
+    context.subscriptions.push(
+        vscode.commands.registerCommand('lightningLinter.runWorkspace', () => {
+            linter.run(vscode.workspace.rootPath, collection);
+        })
+    );
+
+    context.subscriptions.push(
+        vscode.commands.registerCommand('lightningLinter.runFile', (fileName: string) => {
+            if(!fileName){
+                fileName = vscode.window.activeTextEditor.document.fileName;
+            }
+            linter.run(fileName, collection);
+        })
+    );
+
+    //setup listeners
+    if(config.runOnFileOpen){
+        vscode.workspace.onDidSaveTextDocument((textDocument) => {
+            if(textDocument.languageId == 'javascript'){
+                return vscode.commands.executeCommand('lightningLinter.runFile', textDocument.fileName);
+            }
+        });
+    }
+
+    if(config.runOnFileSave){
+        vscode.workspace.onDidOpenTextDocument((textDocument) => {
+            if(textDocument.languageId == 'javascript'){
+                return vscode.commands.executeCommand('lightningLinter.runFile', textDocument.fileName);
+            }
+        });
+    }
+
+    vscode.workspace.onDidCloseTextDocument((textDocument) => {
+        collection.delete(textDocument.uri);
     });
-
-    context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
-export function deactivate() {
-}
+export function deactivate() {}
+

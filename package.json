@@ -5,20 +5,88 @@
     "version": "0.0.1",
     "publisher": "Szandor72",
     "engines": {
-        "vscode": "^1.12.0"
+        "vscode": "^1.12.0",
+        "node": "^5.10.0"
     },
     "categories": [
-        "Other"
+        "Linters"
+    ],
+    "keywords": [
+        "Salesforce",
+        "Lightning",
+        "Static Analysis",
+        "Linter"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "*" 
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
+        "commands": [
+            {
+                "command": "lightningLinter.runWorkspace",
+                "title": "On Workspace",
+                "category": "Lightning Linter"
+            },
+            {
+                "command": "lightningLinter.runFile",
+                "title": "On File",
+                "category": "Lightning Linter"
+            },
+            {
+                "command": "lightningLinter.showOutput",
+                "title": "Show Debug Output",
+                "category": "Lightning Linter"
+            }
+        ],
+        "languages": [
+            {
+                "id": "javascript",
+                "extensions": [
+                    ".js"
+                ],
+                "aliases": [
+                    "Javascript"
+                ]
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Lightning Linter configuration",
+            "properties": {
+                "lightningLinter.Path": {
+                    "type": "string",
+                    "default": "heroku",
+                    "description": "Heroku Toolbelt Executable Path"
+                },
+                "lightningLinter.runOnFileOpen": {
+                    "type": "boolean",
+                    "default": "true",
+                    "description": "Will lint every time a file is opened"
+                },
+                "lightningLinter.runOnFileSave": {
+                    "type": "boolean",
+                    "default": "true",
+                    "description": "Will lint every time a file is saved"
+                }
+            }
+        },
+        "menus": {
+            "explorer/context": [
+                {
+                    "when": "resourceLangId == 'javascript'",
+                    "command": "lightningLinter.runFile",
+                    "group": "lightningLinter"
+                }
+            ],
+            "editor/context": [
+                {
+                    "when": "resourceLangId == 'javascript'",
+                    "command": "lightningLinter.runFile",
+                    "group": "lightningLinter"
+                }
+            ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
