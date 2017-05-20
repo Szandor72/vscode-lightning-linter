@@ -12,8 +12,6 @@ export function activate(context: vscode.ExtensionContext) {
     // if(config.useDefaultRuleset){
     //     config.rulesetPath = context.asAbsolutePath(path.join('rulesets', 'apex_ruleset.xml'));
     // }
-    //todo remove
-    vscode.window.showInformationMessage("Lightning Linter activated");
     //setup instance vars
     const collection = vscode.languages.createDiagnosticCollection('lightningLinter');
     const outputchannel = vscode.window.createOutputChannel('lightningLinter');
@@ -25,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
         })
     );
 
-    const linter = new lightningLinter(outputchannel, config.Path);
+    const linter = new lightningLinter(outputchannel, config.Path, config.ignoreWarnings);
 
     context.subscriptions.push(
         vscode.commands.registerCommand('lightningLinter.runWorkspace', () => {

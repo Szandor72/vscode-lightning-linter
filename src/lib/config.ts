@@ -7,6 +7,7 @@ export class Config{
     public Path: string;
     public runOnFileOpen: boolean;
     public runOnFileSave: boolean;
+    public ignoreWarnings: boolean;
 
     public constructor(){
         let config = vscode.workspace.getConfiguration('lightningLinter');
@@ -15,5 +16,6 @@ export class Config{
         //this.rulesetPath = config.get('rulesetPath') as string;
         this.runOnFileOpen = config.get('runOnFileOpen') as boolean;
         this.runOnFileSave = config.get('runOnFileSave') as boolean;
+        this.ignoreWarnings = config.get('ignoreWarnings') as boolean;
     }
 }
