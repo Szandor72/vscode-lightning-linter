@@ -4,13 +4,11 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export class lightningLinter{
-    private _Path: string;
     private _rulesetPath: string;
     private _outputChannel: vscode.OutputChannel;
     private _ignoreWarnings: boolean;
 
-    public constructor(outputChannel: vscode.OutputChannel, Path: string, ignoreWarnings: boolean){
-        this._Path = Path;
+    public constructor(outputChannel: vscode.OutputChannel, ignoreWarnings: boolean){
         this._outputChannel = outputChannel;
         this._ignoreWarnings = ignoreWarnings;
     }
@@ -84,13 +82,6 @@ export class lightningLinter{
 
     createDiagonistic(result: string): vscode.Diagnostic{
         let resultObject = JSON.parse(result);
-
-        //var type = "error";
-        //                if (result.severity === 1) {
-        //                    type = "warning";
-         //               } 
-        //format: "Problem","Package","File","Priority","Line","Description","Ruleset","Rule"
-       // let parts = line.split(',');
         let lineNum = resultObject.line-1;
         let column = resultObject.column;
         let msg = '';
@@ -112,51 +103,6 @@ export class lightningLinter{
         );
         problem.source = 'Lightning Linter';
         return problem;
-    }
-
-    getFilePath(line: String): string{
-        let parts = line.split(',');
-        return this.stripQuotes(parts[2]);
-    }
-
-    checkPath(): boolean{
-        if(this.dirExists(this._Path)){
-            return true;
-        }
-        this._outputChannel.appendLine(this._Path);
-        vscode.window.showErrorMessage('Heroku Toolbelt Path not set. Please see Installation Instructions.');
-        return false;
-    }
-
-    checkRulesetPath(): boolean{
-        if(this.fileExists(this._rulesetPath)){
-            return true;
-        }
-        vscode.window.showErrorMessage(`No Ruleset not found at ${this._rulesetPath}. Ensure configuration correct or change back to the default.`);
-        return false;
-    }
-
-    //=== Util ===
-    fileExists(filePath){
-        try{
-            let stat = fs.statSync(filePath);
-            return stat.isFile();
-        }catch (err){
-            return false;
-        }
-    }
-
-    dirExists(filePath){
-        try{
-            let stat = fs.statSync(filePath);
-            return stat.isDirectory();
-        }catch (err){
-            return false;
-        }
-    }
-
-    stripQuotes(s : string): string{
-        return s.substr(1, s.length-2);
     }
 }
 

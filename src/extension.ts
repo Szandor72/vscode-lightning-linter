@@ -23,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
         })
     );
 
-    const linter = new lightningLinter(outputchannel, config.Path, config.ignoreWarnings);
+    const linter = new lightningLinter(outputchannel, config.ignoreWarnings);
 
     context.subscriptions.push(
         vscode.commands.registerCommand('lightningLinter.runWorkspace', () => {

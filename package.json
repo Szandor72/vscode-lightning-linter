@@ -54,14 +54,14 @@
             "type": "object",
             "title": "Lightning Linter configuration",
             "properties": {
-                "lightningLinter.Path": {
-                    "type": "string",
-                    "default": "heroku",
-                    "description": "Heroku Toolbelt Executable Path"
+                "lightningLinter.ignoreWarnings": {
+                    "type": "boolean",
+                    "default": "false",
+                    "description": "Will ignore Lightning Linter Warnings"
                 },
                 "lightningLinter.runOnFileOpen": {
                     "type": "boolean",
-                    "default": "true",
+                    "default": "false",
                     "description": "Will lint every time a file is opened"
                 },
                 "lightningLinter.runOnFileSave": {
