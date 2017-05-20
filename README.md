@@ -4,7 +4,7 @@ vscode-linter-lightning
 This VSCODE linter plugin provides
 an interface to [the Lightning Linter in the Heroku Toolbelt](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/cli_intro.htm).
 
-##Features
+## Features
 - per file linting on save or open (deviation from default cli behaviour which scans whole directories only)
 - will only lint lightning component .js files, no others
 - show errors only // ignore warnings
