@@ -26,16 +26,10 @@ export function activate(context: vscode.ExtensionContext) {
     const linter = new lightningLinter(outputchannel, config.ignoreWarnings);
 
     context.subscriptions.push(
-        vscode.commands.registerCommand('lightningLinter.runWorkspace', () => {
-            linter.run(vscode.workspace.rootPath, collection);
-        })
-    );
-
-    context.subscriptions.push(
         vscode.commands.registerCommand('lightningLinter.runFile', (fileName: string) => {
             if(!fileName){
                 fileName = vscode.window.activeTextEditor.document.fileName;
-            }
+            }        
             linter.run(fileName, collection);
         })
     );

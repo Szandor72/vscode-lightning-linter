@@ -19,6 +19,9 @@ system. For detailed instructions see [Heroku.com](https://devcenter.heroku.com/
 - Heroku will otherwise install its own instance of Ruby incl PATH vars. These might cause issues
 - tested on a Win10 machine with most recent Windows Insider Built
 
+### Notes for Mac
+- initial release did not support Mac, it does now.
+
 ### Plugin installation
 
 Makre sure you `heroku` is added to your PATH. After verifying that `Lightning Linter` works from your terminal, proceed to install the extension. 
