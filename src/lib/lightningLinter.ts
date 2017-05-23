@@ -16,6 +16,7 @@ export class lightningLinter{
     public run(fileName: string, collection: vscode.DiagnosticCollection){
         //if(!this.checkPath()) return;
         let fullPath = fileName;
+        // we need a distinction between filepath WIN using (\\) and MAC using /; 
         let dirPath = fullPath.substring(0, fullPath.lastIndexOf('\\')+1); 
         let file = fullPath.substring(dirPath.length,fullPath.length);
         let cmd = 'heroku lightning:lint '+dirPath+' --files '+file+' -j';
