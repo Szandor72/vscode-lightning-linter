@@ -29,7 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('lightningLinter.runFile', (fileName: string) => {
             if(!fileName){
                 fileName = vscode.window.activeTextEditor.document.fileName;
-            }
+            }        
             linter.run(fileName, collection);
         })
     );
