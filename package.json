@@ -70,7 +70,7 @@
                 },
                 "lightningLinter.runOnFileOpen": {
                     "type": "boolean",
-                    "default": "false",
+                    "default": "true",
                     "description": "Will lint every time a file is opened"
                 },
                 "lightningLinter.runOnFileSave": {

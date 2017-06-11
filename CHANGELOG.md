@@ -5,3 +5,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 - Initial release
+
+## [0.0.5]
+- fixed problem with collection clearing when all errors are removed

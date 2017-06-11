@@ -60,6 +60,7 @@ export class lightningLinter{
                     let uri = vscode.Uri.file(key);
                     console.log(value);
                     console.log(key);
+                    console.log(uri);
                     vscode.workspace.openTextDocument(uri).then(doc => {
                     //fix ranges to not include whitespace
                         for(let i = 0; i < value.length; i++){
@@ -77,7 +78,10 @@ export class lightningLinter{
                         //this._outputChannel.appendLine(reason);
                     });
                 });
-            }        
+            }  else {
+                let uri = vscode.Uri.file(fileName);
+                collection.delete(uri);
+            }      
         });
     }
 
