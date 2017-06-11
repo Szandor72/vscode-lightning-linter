@@ -2,7 +2,7 @@
     "name": "vscode-lightning-linter",
     "displayName": "vscode-lightning-linter",
     "description": "Linting Lightning Component JS Files on the fly using local heroku toolbelt installation of heroku lightning:lint. ",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "publisher": "szandor72",
     "engines": {
         "vscode": "^1.12.0",
