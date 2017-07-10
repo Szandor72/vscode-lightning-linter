@@ -33,3 +33,4 @@ Makre sure you `heroku` is added to your PATH. After verifying that `Lightning L
 - [Chuck Jonas](https://github.com/ChuckJonas) 
 - [VSCode Apex PMD](https://github.com/ChuckJonas/vscode-apex-pmd) - from which I learned how to build this. 
 - The Heroku Lightning Team
+- [René Winkelmeyer](https://twitter.com/muenzpraeger) for adding Salesforce DX CLI Support
