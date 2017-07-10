@@ -2,11 +2,13 @@ import * as vscode from 'vscode';
 import * as ChildProcess from 'child_process'
 import * as fs from 'fs';
 import * as path from 'path';
+import {Config} from './config';
 
 export class lightningLinter{
     private _rulesetPath: string;
     private _outputChannel: vscode.OutputChannel;
     private _ignoreWarnings: boolean;
+    private _config = new Config();
 
     public constructor(outputChannel: vscode.OutputChannel, ignoreWarnings: boolean){
         this._outputChannel = outputChannel;
@@ -19,8 +21,8 @@ export class lightningLinter{
         // we need a distinction between filepath WIN using (\\) and MAC using /; 
         let dirPath = fullPath.includes('\\') ? fullPath.substring(0, fullPath.lastIndexOf('\\')+1) : fullPath.substring(0, fullPath.lastIndexOf('/')+1) ; 
         let file = fullPath.substring(dirPath.length,fullPath.length);
-        let cmd = 'heroku lightning:lint '+dirPath+' --files '+file+' -j';
-        
+        let cmd = ((this._config.useSfdx)?'heroku ':'sfdx force:') + 'lightning:lint '+dirPath+' --files '+file+' -j';
+
         this._outputChannel.appendLine('Linter Command: ' + cmd);
         //try {
         ChildProcess.exec(cmd, (error, stdout, stderr) => {

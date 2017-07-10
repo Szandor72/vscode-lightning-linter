@@ -2,7 +2,7 @@ vscode-linter-lightning
 =========================
 
 This VSCODE linter plugin provides
-an interface to [the Lightning Linter in the Heroku Toolbelt](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/cli_intro.htm).
+an interface to [the Lightning Linter in the Heroku Toolbelt](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/cli_intro.htm) or in alternative to [Salesforce DX CLI](https://developer.salesforce.com/tools/sfdxcli).
 
 ## Features
 - per file linting on save or open (deviation from default cli behaviour which scans whole directories only)
@@ -13,6 +13,8 @@ an interface to [the Lightning Linter in the Heroku Toolbelt](https://developer.
 ### `Toolbelt` installation
 Before installing this plugin, you must ensure that `Heroku CLI toolbelt` is installed on your
 system. For detailed instructions see [Heroku.com](https://devcenter.heroku.com/articles/heroku-cli)
+
+If you instead want to run Salesforce DX make sure to install [the CLI from here](https://developer.salesforce.com/tools/sfdxcli).
 
 ### Notes for Windows
 - please install Ruby before installing Heroku
