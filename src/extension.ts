@@ -9,10 +9,6 @@ export function activate(context: vscode.ExtensionContext) {
 
     //setup config
     let config = new Config();
-    // if(config.useDefaultRuleset){
-    //     config.rulesetPath = context.asAbsolutePath(path.join('rulesets', 'apex_ruleset.xml'));
-    // }
-    //setup instance vars
     const collection = vscode.languages.createDiagnosticCollection('lightningLinter');
     const outputchannel = vscode.window.createOutputChannel('lightningLinter');
 

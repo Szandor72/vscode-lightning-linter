@@ -21,7 +21,7 @@ export class lightningLinter{
         // we need a distinction between filepath WIN using (\\) and MAC using /; 
         let dirPath = fullPath.includes('\\') ? fullPath.substring(0, fullPath.lastIndexOf('\\')+1) : fullPath.substring(0, fullPath.lastIndexOf('/')+1) ; 
         let file = fullPath.substring(dirPath.length,fullPath.length);
-        let cmd = ((this._config.useSfdx)?'heroku ':'sfdx force:') + 'lightning:lint '+dirPath+' --files '+file+' -j';
+        let cmd = ( (this._config.useSfdx) ? 'sfdx force:' : 'heroku ' ) + 'lightning:lint '+dirPath+' --files '+file+' -j';
 
         this._outputChannel.appendLine('Linter Command: ' + cmd);
         //try {
