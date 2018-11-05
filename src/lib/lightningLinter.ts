@@ -19,15 +19,27 @@ export class lightningLinter{
         //if(!this.checkPath()) return;
         let fullPath = fileName;
         // we need a distinction between filepath WIN using (\\) and MAC using /; 
-        let dirPath = fullPath.includes('\\') ? fullPath.substring(0, fullPath.lastIndexOf('\\')+1) : fullPath.substring(0, fullPath.lastIndexOf('/')+1) ; 
+        let dirPath = '';
+        if(fullPath.includes('\\')) {
+            //WINDOWS
+            dirPath = fullPath.substring(0, fullPath.lastIndexOf('\\')+1);
+        } else {
+            dirPath = fullPath.substring(0, fullPath.lastIndexOf('/')+1) ; 
+        }
         let file = fullPath.substring(dirPath.length,fullPath.length);
+        //wrap into quotes so we dont need to escape spaces in folder
+        //Also remove trailing / or \
+        dirPath = '"'+dirPath.substring(0,dirPath.length-1)+'"'
+
+
         let cmd = ( (this._config.useSfdx) ? 'sfdx force:' : 'heroku ' ) + 'lightning:lint '+dirPath+' --files '+file+' -j';
 
         this._outputChannel.appendLine('Linter Command: ' + cmd);
         //try {
         ChildProcess.exec(cmd, (error, stdout, stderr) => {
-            this._outputChannel.appendLine('error:' +  error);
-            this._outputChannel.appendLine('stderr:' +  stderr);
+            if(error) {
+                this._outputChannel.appendLine('error:' +  error); 
+            }
 
             if (stdout && stdout.includes("ruleId")) {
                 let resultArray = JSON.parse(stdout);
