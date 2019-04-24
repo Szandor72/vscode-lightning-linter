@@ -32,7 +32,7 @@ export class lightningLinter{
         dirPath = '"'+dirPath.substring(0,dirPath.length-1)+'"'
 
 
-        let cmd = ( (this._config.useSfdx) ? 'sfdx force:' : 'heroku ' ) + 'lightning:lint '+dirPath+' --files '+file+' -j';
+        let cmd = ( (this._config.useSfdx) ? 'sfdx force:' : 'heroku ' ) + 'lightning:lint '+dirPath+' --files '+file+' --json';
 
         this._outputChannel.appendLine('Linter Command: ' + cmd);
         //try {
